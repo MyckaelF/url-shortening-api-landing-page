@@ -5,21 +5,22 @@ const result = document.querySelector('.result')
 const pLink = document.querySelector('.pLink')
 const pResponse = document.querySelector('.pResponse')
 const copyButton = document.querySelector('.copyButton')
+const menuHamburger = document.querySelector('.menuHamburger')
+const menuMobile = document.querySelector('.alignMenus')
+
 
 form.onsubmit = (e) => {
     e.preventDefault()
     checkLink()
 }
 
-copyButton.onclick = () => {
-    navigator.clipboard.writeText(pResponse.textContent)
-    copyButton.classList.add('active')
-    copyButton.textContent = 'Copied!'
-    setTimeout(()=> {
-        copyButton.classList.remove('active')
-        copyButton.textContent = 'Copy'
-    }, 1000)
+menuHamburger.onclick = () => {
+    menuMobile.classList.toggle('active')
 }
+
+
+copyButton.addEventListener('click', copyLink) 
+pResponse.addEventListener('touchstart', copyLink)
 
 function checkLink () {
     let link = url.value
@@ -61,4 +62,14 @@ function buildError (message) {
 function removeError () {
     pError.classList.remove('active')
     url.classList.remove('error')
+}
+
+function copyLink() {
+    navigator.clipboard.writeText(pResponse.textContent)
+    copyButton.classList.add('active')
+    copyButton.textContent = 'Copied!'
+    setTimeout(()=> {
+        copyButton.classList.remove('active')
+        copyButton.textContent = 'Copy'
+    }, 1000)
 }
